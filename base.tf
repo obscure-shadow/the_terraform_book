@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "us-east-1"
+  region = "${var.region}"
 }
 
 # so far it appears that the word in the second set of " " is the name you want to call it,
@@ -7,7 +7,7 @@ provider "aws" {
 # looks like the first set of " " specifies the provider and then type
 # so probably specific to the provider you are using.
 resource "aws_instance" "base" {
-  ami           = "ami-0d729a60"
+  ami           = "${lookup(var.ami, var.region)}"
   instance_type = "t2.micro"
 }
 
