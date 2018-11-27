@@ -30,3 +30,16 @@ resource "aws_subnet" "public" {
     Name = "${var.name}-public"
   }
 }
+
+output "public_subnet_id" {
+  value     = "${aws_subnet.public.id}"
+  sensetive = true
+}
+
+output "vpc_id" {
+  value = "${aws_vpc.tfb.id}"
+}
+
+output "cidr" {
+  value = "${aws_vpc.tfb.cidr_block}"
+}
