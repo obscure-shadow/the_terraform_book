@@ -1,5 +1,11 @@
+variable "region" {
+  description = "aws region"
+  default     = "us-east-1"
+}
+
 variable "key_name" {
   description = "the AWS key pair to use for resources."
+  default     = "david"
 }
 
 variable "ami" {
@@ -15,7 +21,7 @@ variable "instance_type" {
 
 variable "instance_ips" {
   description = "The IPs to use for out instances"
-  defiault    = ["10.0.1.20", "10.0.1.21"]
+  default     = ["10.0.1.20", "10.0.1.21"]
 }
 
 variable "owner_tag" {

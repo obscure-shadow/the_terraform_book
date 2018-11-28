@@ -8,7 +8,7 @@ resource "aws_vpc" "tfb" {
   }
 }
 
-resource "aws_internet.gateway" "tfb" {
+resource "aws_internet_gateway" "tfb" {
   vpc_id = "${aws_vpc.tfb.id}"
 
   tags {
@@ -33,7 +33,7 @@ resource "aws_subnet" "public" {
 
 output "public_subnet_id" {
   value     = "${aws_subnet.public.id}"
-  sensetive = true
+  sensitive = true
 }
 
 output "vpc_id" {
