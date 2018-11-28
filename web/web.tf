@@ -17,12 +17,19 @@ resource "aws_instance" "web" {
   subnet_id                   = "${modlule.vpc.public_subnet_id}"
   associate_public_ip_address = true
   user_data                   = "${file("files/web_bootstrap.sh")}"
+  private_ip                  = "${var.instance_ips[count.index]}"
 
   vpc_security_group_ids = [
     "${aws_security_group.web_host_sg.id}",
   ]
 
-  count = 2
+  tags {
+    # this tells it to "wrap" the owner tags around for instances, ie, team1 and team2
+    # in 8 instances will result in 4 "team1" instances and 4 "team2" instances
+    Owner = "${element(var.owner_tag, count.index)}"
+    Name = "web-${format(%03d, count.index + 1)}"
+  }
+  count = "${length(var.instance_ips)}"
 }
 
 resource "aws_elb" "web" {
