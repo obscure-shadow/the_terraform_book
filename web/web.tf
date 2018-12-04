@@ -12,7 +12,8 @@ module "vpc" {
 resource "aws_instance" "web" {
   ami                         = "${lookup(var.ami, var.region)}"
   instance_type               = "${var.instance_type}"
-  key_name                    = "${var.key_name}"
+  #apparemtnly dont need to use key_name here because it's drawing from env
+  /* key_name                    = "${var.key_name}" */
   subnet_id                   = "${module.vpc.public_subnet_id}"
   associate_public_ip_address = true
   user_data                   = "${file("files/web_bootstrap.sh")}"
